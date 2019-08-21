@@ -1,4 +1,4 @@
-package com.zuofei.netty.firstexample;
+package com.zuofei.netty.https;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -15,7 +15,7 @@ import java.net.URISyntaxException;
  * @auther: 左飞
  * @date: 2019/8/21 15:03
  */
-public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
+public class HttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, HttpObject msg) throws URISyntaxException {
         System.out.println(ctx.channel().remoteAddress());
@@ -64,5 +64,11 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
     public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
         System.out.println("channel unregistered");
         super.channelUnregistered(ctx);
+    }
+
+    @Override
+    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("handler removed");
+        super.handlerRemoved(ctx);
     }
 }

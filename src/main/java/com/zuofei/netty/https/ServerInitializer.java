@@ -1,4 +1,4 @@
-package com.zuofei.netty.firstexample;
+package com.zuofei.netty.https;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -10,11 +10,11 @@ import io.netty.handler.codec.http.HttpServerCodec;
  * @auther: 左飞
  * @date: 2019/8/21 15:00
  */
-public class TestServerInitializer  extends ChannelInitializer<SocketChannel> {
+public class ServerInitializer extends ChannelInitializer<SocketChannel> {
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
         pipeline.addLast("httpServerCodec",new HttpServerCodec());
-        pipeline.addLast("testHttpServerHandler",new TestHttpServerHandler());
+        pipeline.addLast("testHttpServerHandler",new HttpServerHandler());
     }
 }
