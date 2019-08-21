@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_com.zuofei.netty_lecture.test" default="compile.module.com.zuofei.netty_lecture.test">
+  <dirname property="module.com.zuofei.netty_lecture.test.basedir" file="${ant.file.module_com.zuofei.netty_lecture.test}"/>
+  
+  <property name="module.jdk.home.com.zuofei.netty_lecture.test" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.com.zuofei.netty_lecture.test" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.com.zuofei.netty_lecture.test" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.com.zuofei.netty_lecture.test" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="com.zuofei.netty_lecture.test.output.dir" value="undefined"/>
+  <property name="com.zuofei.netty_lecture.test.testoutput.dir" value="${module.com.zuofei.netty_lecture.test.basedir}/../../out/test/classes"/>
+  
+  <path id="com.zuofei.netty_lecture.test.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="com.zuofei.netty_lecture.test.module.production.classpath">
+    <path refid="${module.jdk.classpath.com.zuofei.netty_lecture.test}"/>
+    <pathelement location="${com.zuofei.netty_lecture.main.output.dir}"/>
+  </path>
+  
+  <path id="com.zuofei.netty_lecture.test.runtime.production.module.classpath">
+    <path refid="com.zuofei.netty_lecture.main.runtime.production.module.classpath"/>
+  </path>
+  
+  <path id="com.zuofei.netty_lecture.test.module.classpath">
+    <path refid="${module.jdk.classpath.com.zuofei.netty_lecture.test}"/>
+    <pathelement location="${com.zuofei.netty_lecture.main.output.dir}"/>
+  </path>
+  
+  <path id="com.zuofei.netty_lecture.test.runtime.module.classpath">
+    <pathelement location="${com.zuofei.netty_lecture.test.testoutput.dir}"/>
+    <path refid="com.zuofei.netty_lecture.main.runtime.module.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.com.zuofei.netty_lecture.test">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.com.zuofei.netty_lecture.test">
+    <patternset refid="excluded.from.module.com.zuofei.netty_lecture.test"/>
+  </patternset>
+  
+  <path id="com.zuofei.netty_lecture.test.module.test.sourcepath">
+    <dirset dir="${module.com.zuofei.netty_lecture.test.basedir}/../../src/test">
+      <include name="java"/>
+      <include name="resources"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.com.zuofei.netty_lecture.test" depends="compile.module.com.zuofei.netty_lecture.test.production,compile.module.com.zuofei.netty_lecture.test.tests" description="Compile module com.zuofei.netty_lecture.test"/>
+  
+  <target name="compile.module.com.zuofei.netty_lecture.test.production" depends="register.custom.compilers,compile.module.com.zuofei.netty_lecture.main" description="Compile module com.zuofei.netty_lecture.test; production classes"/>
+  
+  <target name="compile.module.com.zuofei.netty_lecture.test.tests" depends="register.custom.compilers,compile.module.com.zuofei.netty_lecture.test.production" description="compile module com.zuofei.netty_lecture.test; test classes" unless="skip.tests">
+    <mkdir dir="${com.zuofei.netty_lecture.test.testoutput.dir}"/>
+    <javac2 destdir="${com.zuofei.netty_lecture.test.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.com.zuofei.netty_lecture.test}/javac">
+      <compilerarg line="${compiler.args.com.zuofei.netty_lecture.test}"/>
+      <bootclasspath refid="com.zuofei.netty_lecture.test.module.bootclasspath"/>
+      <classpath refid="com.zuofei.netty_lecture.test.module.classpath"/>
+      <src refid="com.zuofei.netty_lecture.test.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.com.zuofei.netty_lecture.test"/>
+    </javac2>
+    
+    <copy todir="${com.zuofei.netty_lecture.test.testoutput.dir}">
+      <fileset dir="${module.com.zuofei.netty_lecture.test.basedir}/../../src/test/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.com.zuofei.netty_lecture.test.basedir}/../../src/test/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.com.zuofei.netty_lecture.test" description="cleanup module">
+    <delete dir="${com.zuofei.netty_lecture.test.output.dir}"/>
+    <delete dir="${com.zuofei.netty_lecture.test.testoutput.dir}"/>
+  </target>
+</project>

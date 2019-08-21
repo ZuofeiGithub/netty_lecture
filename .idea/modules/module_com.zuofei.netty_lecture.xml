@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_com.zuofei.netty_lecture" default="compile.module.com.zuofei.netty_lecture">
+  <dirname property="module.com.zuofei.netty_lecture.basedir" file="${ant.file.module_com.zuofei.netty_lecture}"/>
+  
+  <property name="module.jdk.home.com.zuofei.netty_lecture" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.com.zuofei.netty_lecture" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.com.zuofei.netty_lecture" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.com.zuofei.netty_lecture" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="com.zuofei.netty_lecture.output.dir" value="${module.com.zuofei.netty_lecture.basedir}/../../out/production/com.zuofei.netty_lecture"/>
+  <property name="com.zuofei.netty_lecture.testoutput.dir" value="${module.com.zuofei.netty_lecture.basedir}/../../out/test/com.zuofei.netty_lecture"/>
+  
+  <path id="com.zuofei.netty_lecture.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="com.zuofei.netty_lecture.module.production.classpath">
+    <path refid="${module.jdk.classpath.com.zuofei.netty_lecture}"/>
+    <pathelement location="${basedir}/src/main/libs/netty-all-4.1.39.Final.jar"/>
+  </path>
+  
+  <path id="com.zuofei.netty_lecture.runtime.production.module.classpath">
+    <pathelement location="${com.zuofei.netty_lecture.output.dir}"/>
+    <pathelement location="${basedir}/src/main/libs/netty-all-4.1.39.Final.jar"/>
+  </path>
+  
+  <path id="com.zuofei.netty_lecture.module.classpath">
+    <path refid="${module.jdk.classpath.com.zuofei.netty_lecture}"/>
+    <pathelement location="${com.zuofei.netty_lecture.output.dir}"/>
+    <pathelement location="${basedir}/src/main/libs/netty-all-4.1.39.Final.jar"/>
+  </path>
+  
+  <path id="com.zuofei.netty_lecture.runtime.module.classpath">
+    <pathelement location="${com.zuofei.netty_lecture.testoutput.dir}"/>
+    <pathelement location="${com.zuofei.netty_lecture.output.dir}"/>
+    <pathelement location="${basedir}/src/main/libs/netty-all-4.1.39.Final.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.com.zuofei.netty_lecture">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.com.zuofei.netty_lecture">
+    <patternset refid="excluded.from.module.com.zuofei.netty_lecture"/>
+  </patternset>
+  
+  
+  <target name="compile.module.com.zuofei.netty_lecture" depends="compile.module.com.zuofei.netty_lecture.production,compile.module.com.zuofei.netty_lecture.tests" description="Compile module com.zuofei.netty_lecture"/>
+  
+  <target name="compile.module.com.zuofei.netty_lecture.production" depends="register.custom.compilers" description="Compile module com.zuofei.netty_lecture; production classes"/>
+  
+  <target name="compile.module.com.zuofei.netty_lecture.tests" depends="register.custom.compilers,compile.module.com.zuofei.netty_lecture.production" description="compile module com.zuofei.netty_lecture; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.com.zuofei.netty_lecture" description="cleanup module">
+    <delete dir="${com.zuofei.netty_lecture.output.dir}"/>
+    <delete dir="${com.zuofei.netty_lecture.testoutput.dir}"/>
+  </target>
+</project>
